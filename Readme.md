@@ -31,15 +31,20 @@
                                   - registerUser [Register]
                                   - loginUser [SignIn]
                                   - getUser [Profile]
+                                  - changeUserPassword [updatePassword]
+                                  - logoutUser [logout]
                           Authentication [ authentication.middlewares.js ]
                                   - authentication [middleware]
                           User Validation [ user.validators.js ] [https://zod.dev/] [https://joi.dev/api/?v=17.13.3]
                                   - signupSchema 
                                   - signinSchema
                          User Routes [ user.routes.js ]
-                                  - login route [ post ]
-                                  - register route [ post ]
-                                  - profile route [ get ]
+                                - login route [ post ]  - "/api/v1/users/login"
+                                - register route [ post ] - "/api/v1/users/signup"
+                                - profile route [ get ] - "/api/v1/users/profile"
+                                - change password route [put] - "/api/v1/users/change-password"
+                                - logout route [delete] - "/api/v1/users/logout"
+                                  
 
 
 

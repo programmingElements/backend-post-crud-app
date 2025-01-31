@@ -155,4 +155,34 @@ const changeUserPassword = asyncHandler( async (req, res, next) => {
   }
 });
 
-export {registerUser, loginUser, getUserInfo, changeUserPassword};
+const logoutUser = asyncHandler( async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+
+    if (!userId) {
+      throw new ApiError(400, "Missing the userId.");
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new ApiError(404, "User doesn't exists.");
+    }
+
+    const options = {
+      httpsOnly: true,
+      secure: true
+    }
+
+    res.clearCookie("accessToken", options);
+
+    return res.status(200).json(
+      new ApiResponse(200, {}, "User loggedOut successfully!")
+    );
+
+  } catch (error) {
+    throw new ApiError(error?.status || error?.statusCode || 500, error?.message || "Something went wrong!");
+  }
+});
+
+export {registerUser, loginUser, getUserInfo, changeUserPassword, logoutUser};
